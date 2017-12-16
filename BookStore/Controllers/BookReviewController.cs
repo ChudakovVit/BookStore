@@ -30,7 +30,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Добавим книгу в базу
+                // Добавим ревью в базу
                 db.Review.Add(bookReview);
                 // Сохраним изменения
                 db.SaveChanges();

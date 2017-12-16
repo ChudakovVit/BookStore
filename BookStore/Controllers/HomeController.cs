@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 
 namespace BookStore.Controllers
 {
@@ -12,14 +14,12 @@ namespace BookStore.Controllers
         // создаем контекст данных
         BookContext db = new BookContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            // получаем из бд все объекты Book
-            IEnumerable<Book> books = db.Books;
-            // передаем все объекты в динамическое свойство Books в ViewBag
-            ViewBag.Books = books;
+            int sizePage = 1;
+            int pageIndex = (page ?? 1);
             // возвращаем представление
-            return View(books);
+            return View(db.Books.ToList().ToPagedList(pageIndex, sizePage));
         }
 
         public ActionResult Create()
@@ -65,5 +65,21 @@ namespace BookStore.Controllers
             Book book = db.Books.Find(id);
             return View(book);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            Book book = db.Books.Find(id);
+            return View(book);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id, Name, Author, Genre")] Book book)
+        {
+            db.Entry(book).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

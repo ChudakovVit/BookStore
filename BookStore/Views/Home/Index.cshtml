@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BookStore.Models.Book>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -43,3 +44,4 @@
 }
 
 </table>
+@Html.PagedListPager((PagedList.IPagedList)Model, page => Url.Action("Index", new { page }))
