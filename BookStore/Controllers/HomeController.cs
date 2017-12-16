@@ -16,8 +16,12 @@ namespace BookStore.Controllers
 
         public ActionResult Index(int? page)
         {
-            int sizePage = 1;
+            int sizePage = 20;
             int pageIndex = (page ?? 1);
+            if ( pageIndex < 1 )
+            {
+                pageIndex = 1;
+            }
             // возвращаем представление
             return View(db.Books.ToList().ToPagedList(pageIndex, sizePage));
         }

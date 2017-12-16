@@ -10,11 +10,27 @@ namespace BookStore.Models
     {
         protected override void Seed(BookContext db)
         {
-            db.Books.Add(new Book { Name = "Война и мир", Author = "Л. Толстой", Genre = "Комедия" });
-            db.Books.Add(new Book { Name = "Отцы и дети", Author = "И. Тургенев", Genre = "Сатира" });
-            db.Books.Add(new Book { Name = "Чайка", Author = "А. Чехов", Genre = "Юмор" });
-            db.Review.Add(new BookReview { Name = "asdas", Review = "adasd", BookName = "asdfff", Id = 0, BookId = 1 });
-
+            for (int i = 1; i < 100; i++)
+            {
+                string bookName = "BookName_" + i;
+                string bookAuthorName = "BookAuthorName_" + i;
+                string bookGenre = "BookGenre_" + i;
+                db.Books.Add(new Book { Name = bookName, Author = bookAuthorName, Genre = bookGenre });
+                for (int j = 1; j < 10; j++)
+                {
+                    string reviewerName = "ReviewerName_" + j;
+                    string reviewText = "ReviewText_" + j;
+                    db.Review.Add(new BookReview
+                    {
+                        Name = reviewerName,
+                        Review = reviewText,
+                        BookName = bookName,
+                        Id = j,
+                        BookId = i
+                    });
+                }
+            }
+           
             base.Seed(db);
         }
     }
