@@ -21,6 +21,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Genre)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Like)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dislike)
+        </th>
         <th></th>
     </tr>
 
@@ -36,9 +42,21 @@
             @Html.DisplayFor(modelItem => item.Genre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <form action="/Home/Like" method="post">
+                <input type="hidden" name="bookId" value=@item.Id />
+                <input type="submit" style="background: #00ff21; text-align: center" value=@Html.DisplayFor(modelItem => item.Like) />
+            </form>
+        </td>
+        <td>
+            <form action="/Home/Dislike" method="post">
+                <input type="hidden" name="bookId" value=@item.Id />
+                <input type="submit" style="background: #ff0000; text-align: center" value=@Html.DisplayFor(modelItem => item.Dislike)>
+            </form>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

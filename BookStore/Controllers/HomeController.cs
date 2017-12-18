@@ -85,5 +85,27 @@ namespace BookStore.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Like()
+        {
+            int bookId = int.Parse(Request.Form.Get("bookId"));
+            Book book = db.Books.Find(bookId);
+            book.Like++;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public ActionResult Dislike()
+        {
+            int bookId = int.Parse(Request.Form.Get("bookId"));
+            Book book = db.Books.Find(bookId);
+            book.Dislike++;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

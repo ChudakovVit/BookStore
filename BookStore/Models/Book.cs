@@ -15,6 +15,10 @@ namespace BookStore.Models
         public string Author { get; set; }
         // автор книги
         public string Genre { get; set; }
+        // количество лайков
+        public int Like { get; set; }
+        // колчество дизлайков
+        public int Dislike { get; set; }
 
         public virtual ICollection<BookReview> BookReviews { get; set; }
     }

@@ -10,12 +10,12 @@ namespace BookStore.Models
     {
         protected override void Seed(BookContext db)
         {
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 50; i++)
             {
                 string bookName = "BookName_" + i;
                 string bookAuthorName = "BookAuthorName_" + i;
                 string bookGenre = "BookGenre_" + i;
-                db.Books.Add(new Book { Name = bookName, Author = bookAuthorName, Genre = bookGenre });
+                db.Books.Add(new Book { Name = bookName, Author = bookAuthorName, Genre = bookGenre, Like = i*i, Dislike = i+i });
                 for (int j = 1; j < 10; j++)
                 {
                     string reviewerName = "ReviewerName_" + j;
